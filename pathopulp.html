@@ -191,7 +191,7 @@
         },
         {
             id: 5, name: "Parodontite apicale aiguë",
-            data: { motif: "OUI", spontanee: "OUI", provoquee: "OUI", vitalite: "NON", contamination: "OUI", percussion: "OUI", tumefaction: "NON", radio_apicale: "NON" }
+            data: { motif: "OUI", spontanee: "OUI", provoquee: "NON", vitalite: "NON", contamination: "OUI", percussion: "OUI", tumefaction: "NON", radio_apicale: "NON" }
         },
         {
             id: 13, name: "Parodontite apicale chronique",
@@ -199,18 +199,18 @@
         },
         {
             id: 15, name: "Parodontite apicale chr. suppurée",
-            data: { motif: "NON", spontanee: "NON", provoquee: "NON", vitalite: "NON", contamination: "OUI", percussion: "NON", fistule: "OUI", radio_apicale: "OUI" }
+            data: { motif: "OUI/NON", spontanee: "NON", provoquee: "OUI/NON", vitalite: "NON", contamination: "OUI", percussion: "NON", fistule: "OUI", radio_apicale: "OUI" }
         },
         {
             id: 6, name: "Abcès apical aigu",
-            data: { motif: "OUI", spontanee: "OUI", provoquee: "OUI", vitalite: "NON", contamination: "OUI", percussion: "OUI", tumefaction: "OUI", fistule: "NON", radio_apicale: "NON", palpation: "OUI" }
+            data: { motif: "OUI", spontanee: "OUI", provoquee: "NON", vitalite: "NON", contamination: "OUI", percussion: "OUI", tumefaction: "OUI", fistule: "NON", radio_apicale: "NON", palpation: "OUI" }
         },
         {
             id: 8, name: "Abcès parodontal",
             data: { 
                 motif: "OUI", 
                 spontanee: "OUI", 
-                provoquee: "OUI", 
+                provoquee: "NON", 
                 vitalite: "OUI", 
                 poche: "OUI", 
                 tumefaction: "OUI", 
@@ -243,7 +243,7 @@
         { id: 2, text: "Y a t-il une douleur provoquée au froid ?", key: "provoquee" },
         { id: 3, text: "Y a t-il une douleur provoquée au chaud ?", key: "provoquee" },
         { id: 4, text: "Y a t-il une douleur provoquée au sucre ?", key: "provoquee" },
-        { id: 5, text: "Y a t-il une douleur provoquée à la mastication ?", key: "provoquee" },
+        { id: 5, text: "Y a t-il une douleur provoquée à la mastication ?", key: "percussion" },
         { id: 6, text: "Y a t-il une douleur à la morsure ?", key: "percussion" }, // Note: Morsure est souvent lié à la percussion/pression
         { id: 7, text: "Y a t-il une douleur spontanée ?", key: "spontanee" },
         { id: 8, text: "Y a t-il une tuméfaction ?", key: "tumefaction" },
@@ -391,3 +391,4 @@
 </script>
 </body>
 </html>
+
