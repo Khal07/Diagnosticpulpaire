@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pathopulp - Auto-Apprentissage (Final)</title>
+    <title>Pathopulp - Auto-Apprentissage (Final v2)</title>
     <style>
         :root {
             --primary: #2c3e50;
@@ -150,7 +150,7 @@
 
 <script>
     // =========================================================
-    // DONNÉES DU PDF (MODIFIÉES SELON TES INSTRUCTIONS)
+    // DONNÉES DU PDF
     // =========================================================
     const PATIENT_DATA = [
         {
@@ -163,12 +163,10 @@
         },
         {
             id: 3, name: "Pulpite aiguë réversible",
-            // MODIF : prolonge OUI, prolonge1 OUI, prolonge2 NON
             data: { motif: "OUI", spontanee: "NON", provoquee: "OUI", vitalite: "OUI", prolonge: "OUI", prolonge1: "OUI", prolonge2: "NON", percussion: "NON" }
         },
         {
             id: 4, name: "Pulpite aiguë irréversible",
-            // MODIF : prolonge OUI, prolonge1 OUI, prolonge2 OUI
             data: { motif: "OUI", spontanee: "OUI", provoquee: "OUI", vitalite: "OUI", prolonge: "OUI", prolonge1: "OUI", prolonge2: "OUI", percussion: "NON" }
         },
         {
@@ -177,7 +175,7 @@
         },
         {
             id: 12, name: "Pulpite chronique hyperplasique",
-            data: { motif: "OUI/NON", spontanee: "NON", vitalite: "OUI", polype: "OUI" }
+            data: { motif: "OUI/NON", spontanee: "NON", vitalite: "OUI/NON", polype: "OUI" }
         },
         {
             id: 10, name: "Pulpite chr. (dégénérescence calcique)",
@@ -205,7 +203,8 @@
         },
         {
             id: 6, name: "Abcès apical aigu",
-            data: { motif: "OUI", spontanee: "OUI", vitalite: "NON", percussion: "OUI", tumefaction: "OUI", fistule: "NON", radio_apicale: "OUI/NON" }
+            // MODIFICATION ICI : palpation: "OUI"
+            data: { motif: "OUI", spontanee: "OUI", vitalite: "NON", percussion: "OUI", tumefaction: "OUI", fistule: "NON", radio_apicale: "OUI/NON", palpation: "OUI" }
         },
         {
             id: 8, name: "Abcès parodontal",
@@ -221,7 +220,7 @@
         },
         {
             id: 17, name: "Parodontite traumatique",
-            data: { motif: "OUI", spontanee: "OUI", vitalite: "OUI", percussion: "OUI", radio_apicale: "NON" }
+            data: { motif: "OUI", spontanee: "NON", vitalite: "OUI", percussion: "OUI", radio_apicale: "NON" }
         }
     ];
 
@@ -243,6 +242,9 @@
         { id: 13, text: "La réponse se prolonge longtemps ?", key: "prolonge2" }, 
         
         { id: 14, text: "La percussion est elle douloureuse ?", key: "percussion" },
+        // NOUVELLE QUESTION AJOUTÉE
+        { id: 25, text: "La palpation apicale est-elle douloureuse ?", key: "palpation" },
+
         { id: 16, text: "La compression de la papille est elle douloureuse ?", key: "papille" },
         { id: 17, text: "Y a t-il un ostium fistulaire ?", key: "fistule" },
         { id: 18, text: "Y a t-il une poche parodontale ?", key: "poche" },
@@ -375,4 +377,3 @@
 </script>
 </body>
 </html>
-
