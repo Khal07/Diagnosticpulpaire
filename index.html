@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pathopulp - Auto-Apprentissage (Avec Solution)</title>
+    <title>Pathopulp - Auto-Apprentissage (Corrigé)</title>
     <style>
         :root {
             --primary: #2c3e50;
@@ -150,12 +150,12 @@
 
 <script>
     // =========================================================
-    // DONNÉES STRICTES DU PDF
+    // DONNÉES DU PDF (CORRIGÉES)
     // =========================================================
     const PATIENT_DATA = [
         {
             id: 1, name: "Dent saine",
-            data: { motif: "NON", spontanee: "NON", provoquee: "NON", vitalite: "OUI", prolonge: "NON", percussion: "NON", tumefaction: "NON", radio_apicale: "NON" }
+            data: { motif: "NON", spontanee: "NON", provoquee: "NON", vitalite: "OUI", prolonge: "NON", prolonge1: "NON", prolonge2: "NON", percussion: "NON", tumefaction: "NON", radio_apicale: "NON" }
         },
         {
             id: 2, name: "Exposition dentinaire",
@@ -163,15 +163,17 @@
         },
         {
             id: 3, name: "Pulpite aiguë réversible",
-            data: { motif: "OUI", spontanee: "NON", provoquee: "OUI", vitalite: "OUI", prolonge: "NON", percussion: "NON" }
+            // MODIFICATION ICI : prolonge1 = OUI, prolonge2 = NON
+            data: { motif: "OUI", spontanee: "NON", provoquee: "OUI", vitalite: "OUI", prolonge: "NON", prolonge1: "OUI", prolonge2: "NON", percussion: "NON" }
         },
         {
             id: 4, name: "Pulpite aiguë irréversible",
-            data: { motif: "OUI", spontanee: "OUI", provoquee: "OUI", vitalite: "OUI", prolonge: "OUI", percussion: "NON" }
+            // MODIFICATION ICI : prolonge1 = NON, prolonge2 = OUI
+            data: { motif: "OUI", spontanee: "OUI", provoquee: "OUI", vitalite: "OUI", prolonge: "OUI", prolonge1: "NON", prolonge2: "OUI", percussion: "NON" }
         },
         {
             id: 9, name: "Pulpite chronique irréversible",
-            data: { motif: "OUI", spontanee: "NON", provoquee: "OUI", vitalite: "OUI", prolonge: "OUI", percussion: "OUI/NON" }
+            data: { motif: "OUI", spontanee: "NON", provoquee: "OUI", vitalite: "OUI", prolonge: "OUI", prolonge1: "NON", prolonge2: "OUI", percussion: "OUI/NON" }
         },
         {
             id: 12, name: "Pulpite chronique hyperplasique",
@@ -215,7 +217,7 @@
         },
         {
             id: 16, name: "Hypersensibilité dentinaire",
-            data: { motif: "OUI", spontanee: "NON", provoquee: "OUI", vitalite: "OUI", prolonge: "NON", radio_apicale: "NON" }
+            data: { motif: "OUI", spontanee: "NON", provoquee: "OUI", vitalite: "OUI", prolonge: "NON", prolonge1: "NON", prolonge2: "NON", radio_apicale: "NON" }
         },
         {
             id: 17, name: "Parodontite traumatique",
@@ -224,6 +226,7 @@
     ];
 
     // QUESTIONS
+    // Correction : Clés prolonge1 et prolonge2 attribuées correctement
     const QUESTIONS = [
         { id: 1, text: "La douleur est-elle le motif de consultation ?", key: "motif" },
         { id: 2, text: "Y a t-il une douleur provoquée au froid ?", key: "provoquee" },
@@ -235,9 +238,12 @@
         { id: 8, text: "Y a t-il une tuméfaction ?", key: "tumefaction" },
         { id: 9, text: "Y a t-il une voie de contamination bactérienne ?", key: "contamination" },
         { id: 10, text: "Y a t-il une réponse au test de vitalité ?", key: "vitalite" },
+        
+        // CORRECTION ICI : 3 questions distinctes
         { id: 11, text: "La réponse au test de vitalité se prolonge-t-elle ?", key: "prolonge" },
-        { id: 12, text: "La réponse se prolonge un peu ?", key: "prolonge" },
-        { id: 13, text: "La réponse se prolonge longtemps ?", key: "prolonge" },
+        { id: 12, text: "La réponse se prolonge un peu ?", key: "prolonge1" },     // Clé modifiée
+        { id: 13, text: "La réponse se prolonge longtemps ?", key: "prolonge2" }, // Clé modifiée
+        
         { id: 14, text: "La percussion est elle douloureuse ?", key: "percussion" },
         { id: 16, text: "La compression de la papille est elle douloureuse ?", key: "papille" },
         { id: 17, text: "Y a t-il un ostium fistulaire ?", key: "fistule" },
@@ -297,6 +303,8 @@
         
         const question = QUESTIONS.find(q => q.id === qId);
         let reponse = currentPathology.data[question.key];
+        
+        // Si la donnée n'est pas spécifiée pour cette maladie, on considère NON par défaut
         if (!reponse) reponse = "NON";
 
         const log = document.getElementById("log-container");
