@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pathopulp - Auto-Apprentissage (Avec Solution)</title>
+    <title>Pathopulp - Auto-Apprentissage (v9 Matrice Stricte)</title>
     <style>
         :root {
             --primary: #2c3e50;
@@ -150,76 +150,90 @@
 
 <script>
     // =========================================================
-    // DONNÉES STRICTES DU PDF
+    // DONNÉES DU PDF (Matrice Stricte)
     // =========================================================
     const PATIENT_DATA = [
         {
             id: 1, name: "Dent saine",
-            data: { motif: "NON", spontanee: "NON", provoquee: "NON", vitalite: "OUI", prolonge: "NON", percussion: "NON", tumefaction: "NON", radio_apicale: "NON" }
+            data: { motif: "NON", spontanee: "NON", provoquee: "NON", vitalite: "OUI", prolonge: "NON", prolonge1: "NON", prolonge2: "NON", percussion: "NON", tumefaction: "NON", radio_apicale: "NON" }
         },
         {
             id: 2, name: "Exposition dentinaire",
-            data: { motif: "OUI/NON", spontanee: "NON", provoquee: "OUI/NON", vitalite: "OUI", contamination: "OUI", percussion: "NON" }
+            data: { motif: "OUI", spontanee: "NON", provoquee: "OUI", vitalite: "OUI", contamination: "OUI", percussion: "NON" }
         },
         {
             id: 3, name: "Pulpite aiguë réversible",
-            data: { motif: "OUI", spontanee: "NON", provoquee: "OUI", vitalite: "OUI", prolonge: "NON", percussion: "NON" }
+            data: { motif: "OUI", spontanee: "NON", provoquee: "OUI", vitalite: "OUI", contamination: "OUI", prolonge: "NON", percussion: "OUI/NON" }
         },
         {
             id: 4, name: "Pulpite aiguë irréversible",
-            data: { motif: "OUI", spontanee: "OUI", provoquee: "OUI", vitalite: "OUI", prolonge: "OUI", percussion: "NON" }
+            data: { motif: "OUI", spontanee: "OUI", provoquee: "OUI", vitalite: "OUI", contamination: "OUI", prolonge: "OUI", prolonge1: "NON", prolonge2: "OUI", percussion: "OUI" }
         },
         {
             id: 9, name: "Pulpite chronique irréversible",
-            data: { motif: "OUI", spontanee: "NON", provoquee: "OUI", vitalite: "OUI", prolonge: "OUI", percussion: "OUI/NON" }
+            data: { motif: "NON", spontanee: "NON", provoquee: "OUI", vitalite: "OUI", contamination: "OUI", prolonge: "OUI", prolonge1: "NON", prolonge2: "OUI", percussion: "NON" }
         },
         {
             id: 12, name: "Pulpite chronique hyperplasique",
-            data: { motif: "OUI/NON", spontanee: "NON", vitalite: "OUI", polype: "OUI" }
+            data: { motif: "NON", spontanee: "NON", provoquee: "OUI", vitalite: "OUI", contamination: "OUI", polype: "OUI" }
         },
         {
             id: 10, name: "Pulpite chr. (dégénérescence calcique)",
-            data: { motif: "NON", spontanee: "NON", vitalite: "OUI", radio_calc: "OUI" }
+            data: { motif: "NON", spontanee: "NON", provoquee: "OUI", vitalite: "OUI", contamination: "OUI", radio_calc: "OUI" }
         },
         {
             id: 11, name: "Pulpite chr. (résorption interne)",
-            data: { motif: "OUI/NON", spontanee: "NON", vitalite: "OUI", radio_resorp: "OUI" }
+            data: { motif: "NON", spontanee: "NON", provoquee: "OUI", vitalite: "OUI", contamination: "OUI", radio_resorp: "OUI" }
         },
         {
             id: 14, name: "Nécrose asymptomatique",
-            data: { motif: "NON", spontanee: "NON", vitalite: "NON", percussion: "NON", tumefaction: "NON", fistule: "NON", radio_apicale: "OUI/NON" }
+            data: { motif: "NON", spontanee: "NON", vitalite: "NON", contamination: "OUI", percussion: "NON", tumefaction: "NON", fistule: "NON", radio_apicale: "NON" }
         },
         {
             id: 5, name: "Parodontite apicale aiguë",
-            data: { motif: "OUI", spontanee: "OUI", vitalite: "NON", percussion: "OUI", tumefaction: "NON", radio_apicale: "NON" }
+            data: { motif: "OUI", spontanee: "OUI", provoquee: "OUI", vitalite: "NON", contamination: "OUI", percussion: "OUI", tumefaction: "NON", radio_apicale: "NON" }
         },
         {
             id: 13, name: "Parodontite apicale chronique",
-            data: { motif: "NON", spontanee: "NON", vitalite: "NON", percussion: "NON", fistule: "NON", radio_apicale: "OUI" }
+            data: { motif: "NON", spontanee: "NON", provoquee: "OUI/NON", vitalite: "NON", contamination: "OUI", percussion: "NON", fistule: "NON", radio_apicale: "OUI" }
         },
         {
             id: 15, name: "Parodontite apicale chr. suppurée",
-            data: { motif: "OUI/NON", spontanee: "OUI/NON", vitalite: "NON", percussion: "OUI/NON", fistule: "OUI", radio_apicale: "OUI" }
+            data: { motif: "NON", spontanee: "NON", provoquee: "NON", vitalite: "NON", contamination: "OUI", percussion: "NON", fistule: "OUI", radio_apicale: "OUI" }
         },
         {
             id: 6, name: "Abcès apical aigu",
-            data: { motif: "OUI", spontanee: "OUI", vitalite: "NON", percussion: "OUI", tumefaction: "OUI", fistule: "NON", radio_apicale: "OUI/NON" }
+            data: { motif: "OUI", spontanee: "OUI", provoquee: "OUI", vitalite: "NON", contamination: "OUI", percussion: "OUI", tumefaction: "OUI", fistule: "NON", radio_apicale: "NON", palpation: "OUI" }
         },
         {
             id: 8, name: "Abcès parodontal",
-            data: { motif: "OUI", vitalite: "OUI", poche: "OUI", tumefaction: "OUI", percussion: "OUI", radio_apicale: "NON" }
+            data: { 
+                motif: "OUI", 
+                spontanee: "OUI", 
+                provoquee: "OUI", 
+                vitalite: "OUI", 
+                poche: "OUI", 
+                tumefaction: "OUI", 
+                fistule: "OUI",
+                percussion: "OUI", 
+                papille: "OUI",
+                radio_apicale: "NON", 
+                radio_septale: "OUI" 
+            }
         },
         {
             id: 7, name: "Syndrome du septum",
-            data: { motif: "OUI", spontanee: "OUI/NON", papille: "OUI", radio_septale: "OUI", vitalite: "OUI" }
+            data: { motif: "OUI", spontanee: "OUI", provoquee: "OUI", vitalite: "OUI", papille: "OUI", percussion: "OUI", radio_septale: "OUI" }
         },
         {
             id: 16, name: "Hypersensibilité dentinaire",
-            data: { motif: "OUI", spontanee: "NON", provoquee: "OUI", vitalite: "OUI", prolonge: "NON", radio_apicale: "NON" }
+            // MIS A JOUR SELON MATRICE STRICTE
+            data: { motif: "OUI", spontanee: "OUI", provoquee: "OUI", vitalite: "OUI", percussion: "OUI", radio_apicale: "NON" }
         },
         {
             id: 17, name: "Parodontite traumatique",
-            data: { motif: "OUI", spontanee: "NON", vitalite: "OUI", percussion: "OUI", radio_apicale: "NON" }
+            // MIS A JOUR SELON MATRICE STRICTE
+            data: { motif: "OUI/NON", spontanee: "NON", provoquee: "OUI/NON", vitalite: "OUI", percussion: "NON", radio_apicale: "NON" }
         }
     ];
 
@@ -229,16 +243,22 @@
         { id: 2, text: "Y a t-il une douleur provoquée au froid ?", key: "provoquee" },
         { id: 3, text: "Y a t-il une douleur provoquée au chaud ?", key: "provoquee" },
         { id: 4, text: "Y a t-il une douleur provoquée au sucre ?", key: "provoquee" },
-        { id: 5, text: "Y a t-il une douleur provoquée à la mastication ?", key: "percussion" },
-        { id: 6, text: "Y a t-il une douleur à la morsure ?", key: "percussion" },
+        { id: 5, text: "Y a t-il une douleur provoquée à la mastication ?", key: "provoquee" },
+        { id: 6, text: "Y a t-il une douleur à la morsure ?", key: "percussion" }, // Note: Morsure est souvent lié à la percussion/pression
         { id: 7, text: "Y a t-il une douleur spontanée ?", key: "spontanee" },
         { id: 8, text: "Y a t-il une tuméfaction ?", key: "tumefaction" },
+        
         { id: 9, text: "Y a t-il une voie de contamination bactérienne ?", key: "contamination" },
+        
         { id: 10, text: "Y a t-il une réponse au test de vitalité ?", key: "vitalite" },
+        
         { id: 11, text: "La réponse au test de vitalité se prolonge-t-elle ?", key: "prolonge" },
-        { id: 12, text: "La réponse se prolonge un peu ?", key: "prolonge" },
-        { id: 13, text: "La réponse se prolonge longtemps ?", key: "prolonge" },
+        { id: 12, text: "La réponse se prolonge un peu ?", key: "prolonge1" },     
+        { id: 13, text: "La réponse se prolonge longtemps ?", key: "prolonge2" }, 
+        
         { id: 14, text: "La percussion est elle douloureuse ?", key: "percussion" },
+        { id: 25, text: "La palpation apicale est-elle douloureuse ?", key: "palpation" },
+
         { id: 16, text: "La compression de la papille est elle douloureuse ?", key: "papille" },
         { id: 17, text: "Y a t-il un ostium fistulaire ?", key: "fistule" },
         { id: 18, text: "Y a t-il une poche parodontale ?", key: "poche" },
@@ -297,6 +317,8 @@
         
         const question = QUESTIONS.find(q => q.id === qId);
         let reponse = currentPathology.data[question.key];
+        
+        // Si la donnée n'est pas spécifiée pour cette maladie, on considère NON par défaut
         if (!reponse) reponse = "NON";
 
         const log = document.getElementById("log-container");
